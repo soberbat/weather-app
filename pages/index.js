@@ -4,6 +4,7 @@ import { CurrentCity } from "../src/components/CurrentCity";
 import { WeatherAroundTheWorld } from "../src/components/WeatherAroundTheWorld";
 import { Container, Inner } from "../src/styles/İndex.styled.js";
 import { apiKey } from "../src/styles/GlobalStyles.styled";
+import { Search } from "../src/components/Search";
 
 export default function Home() {
   const [currentLoc, setCurrentLoc] = useState("");
@@ -37,6 +38,7 @@ export default function Home() {
   return (
     <Container>
       <Inner>
+        <Search />
         {currentLoc && <CurrentCity data={currentLoc} />}
         <WeatherAroundTheWorld />
       </Inner>

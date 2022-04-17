@@ -30,6 +30,7 @@ export const Heading = styled.div`
     color: ${({ theme }) => theme.black};
     font-size: 5rem;
     margin-bottom: 1rem;
+    margin-top: 0;
   }
   span {
     color: ${({ theme }) => theme.grayLight};

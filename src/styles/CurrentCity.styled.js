@@ -4,7 +4,7 @@ export const Container = styled(motion.div)`
   display: flex;
   padding: 1rem;
   justify-content: space-between;
-  margin-bottom: 1rem;
+
   border-radius: 15px;
   -webkit-box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.07);
   box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.07);

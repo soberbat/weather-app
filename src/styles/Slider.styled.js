@@ -26,6 +26,7 @@ export const Where = styled.div`
 export const Heat = styled.div`
   font-size: 1rem;
   font-weight: 100;
+
   color: ${({ theme }) => theme.grayLight};
   span {
     font-size: 0.3rem;
@@ -33,6 +34,7 @@ export const Heat = styled.div`
 `;
 
 export const City = styled.h1`
+  cursor: pointer;
   font-size: 2rem;
   width: 100%;
   margin: 0 0;

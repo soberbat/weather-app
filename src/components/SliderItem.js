@@ -42,20 +42,20 @@ export const Slider = ({ randomLocations }) => {
         {randomLocations.map((item) => {
           let source = resolveIcon(item.weather[0].main);
           return (
-            <Link key={item.name} href={`/city/${item.name}`}>
-              <SwiperSlide key={item.name}>
-                <SliderContainer>
-                  <img src={`/${source}`} alt="" />
-                  <Where>
-                    <span> {item.weather[0].main} </span>
-                    <Heat>
-                      {Math.floor(item.main.temp - 270)} <span>°C </span>
-                    </Heat>
-                  </Where>
-                </SliderContainer>
+            <SwiperSlide key={item.name}>
+              <SliderContainer>
+                <img src={`/${source}`} alt="" />
+                <Where>
+                  <span> {item.weather[0].main} </span>
+                  <Heat>
+                    {Math.floor(item.main.temp - 270)} <span>°C </span>
+                  </Heat>
+                </Where>
+              </SliderContainer>
+              <Link key={item.name} href={`/city/${item.name}`}>
                 <City> {item.name} </City>
-              </SwiperSlide>
-            </Link>
+              </Link>
+            </SwiperSlide>
           );
         })}
       </Swiper>

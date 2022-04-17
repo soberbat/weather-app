@@ -13,6 +13,9 @@ export const Container = styled.div`
 export const Inner = styled.div`
   width: 100%;
   max-width: 950px;
+  gap: 1rem;
+  display: flex;
+  flex-direction: column;
 `;
 // export const Inner = styled.div``;
 // export const Inner = styled.div``;
