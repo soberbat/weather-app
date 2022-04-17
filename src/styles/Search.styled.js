@@ -19,8 +19,8 @@ export const SearchInput = styled.input.attrs({ type: "input" })`
 `;
 
 export const SubmitButton = styled.button`
-  background-color: ${({ theme }) => theme.grayTextTone};
-  color: ${({ theme }) => theme.gray};
+  background-color: ${({ theme }) => theme.gray};
+  color: ${({ theme }) => theme.white};
   border: none;
   border-radius: 7px;
   display: inline-block;

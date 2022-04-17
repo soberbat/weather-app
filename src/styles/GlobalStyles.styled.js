@@ -9,6 +9,10 @@ export const GlobalStyle = createGlobalStyle`
       font-family: 'Akshar', sans-serif;
     }
 
+    .video{
+      object-fit: cover;
+    }
+
     *{
       box-sizing: border-box;
     }
@@ -57,7 +61,7 @@ export const GlobalStyle = createGlobalStyle`
       height: 250px;
       gap: 2rem;
       color: ${({ theme }) => theme.grayTextTone};
-      
+
 
 
       border: 2px solid black;
@@ -145,4 +149,16 @@ export const resolveIcon = (condition) => {
   if (condition === "Rain") {
     return "rainy.png";
   }
+  if (condition === "Thunderstorm") return "thunder.png";
+};
+
+export const VideoProps = {
+  className: "video",
+  loop: true,
+  muted: true,
+  autoPlay: true,
+  style: {
+    width: "100%",
+    height: "100%",
+  },
 };
