@@ -11,6 +11,8 @@ import "swiper/css/navigation";
 import { Navigation } from "swiper";
 import { LeftArrow, RightArrow } from "../styles/GlobalStyles.styled";
 import { SliderContainer, Where, Heat, City } from "../styles/Slider.styled";
+import Link from "next/link";
+
 export const Slider = ({ randomLocations }) => {
   const navigationPrevRef = useRef(null);
   const navigationNextRef = useRef(null);
@@ -40,18 +42,20 @@ export const Slider = ({ randomLocations }) => {
         {randomLocations.map((item) => {
           let source = resolveIcon(item.weather[0].main);
           return (
-            <SwiperSlide>
-              <SliderContainer>
-                <img src={`/${source}`} alt="" />
-                <Where>
-                  <span> {item.weather[0].main} </span>
-                  <Heat>
-                    {Math.floor(item.main.temp - 270)} <span>°C </span>
-                  </Heat>
-                </Where>
-              </SliderContainer>
-              <City> {item.name} </City>
-            </SwiperSlide>
+            <Link key={item.name} href={`/city/${item.name}`}>
+              <SwiperSlide key={item.name}>
+                <SliderContainer>
+                  <img src={`/${source}`} alt="" />
+                  <Where>
+                    <span> {item.weather[0].main} </span>
+                    <Heat>
+                      {Math.floor(item.main.temp - 270)} <span>°C </span>
+                    </Heat>
+                  </Where>
+                </SliderContainer>
+                <City> {item.name} </City>
+              </SwiperSlide>
+            </Link>
           );
         })}
       </Swiper>
