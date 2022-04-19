@@ -5,7 +5,7 @@ export const GlobalStyle = createGlobalStyle`
     body {
       margin: 0;
       padding: 0;
-      background: teal;
+
       font-family: 'Akshar', sans-serif;
     }
 
@@ -83,6 +83,14 @@ export const GlobalStyle = createGlobalStyle`
       width: 100% !important;
       position: relative !important;
       height: unset !important;
+    }
+  }
+
+
+  @media (max-width: 768px) {
+
+    html{
+      font-size: 10px;
     }
   }
 `;

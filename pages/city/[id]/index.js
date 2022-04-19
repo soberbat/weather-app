@@ -1,10 +1,21 @@
 import { VideoProps } from "../../../src/styles/GlobalStyles.styled";
-
+import Clock from "react-live-clock";
+import { useEffect, useState } from "react";
+import { Chart } from "../../../src/components/Chart";
+import moment from "moment";
 import {
+  CityChange,
   Container,
   Controls,
+  HourCityContainer,
+  SBCity,
   SideBar,
   VideoContainer,
+  Weather,
+  WeatherDetails,
+  FramerSideBar,
+  FramerVideoContainer,
+  NextDays,
 } from "../../../src/styles/City.styled";
 
 export async function getServerSideProps({ query }) {
@@ -22,19 +33,114 @@ export async function getServerSideProps({ query }) {
 }
 
 export default function City({ data }) {
-  const { list, city } = data;
+  //CURRENT WEATHER DATA
 
-  console.log(list);
+  const { list, city } = data;
+  const [currentWeatherData, ...rest] = list;
+  const { main, weather } = currentWeatherData;
+  const mainWeather = weather[0].main.toLowerCase();
+
+  const [isSSR, setIsSSR] = useState(false);
+  useEffect(() => {
+    setIsSSR(true);
+  }, []);
+
+  const resolveTemperature = (day, data) => {
+    const currentDay = moment().format("YYYY-MM-DD");
+    const forecastedDay = moment().add(day, "days").format("YYYY-MM-DD");
+
+    const theDay = list.find(
+      (item) => item.dt_txt.split(" ")[0] === forecastedDay
+    );
+
+    return Math.round(theDay.main.temp - 272);
+  };
 
   return (
-    <Container>
-      <VideoContainer>
-        <video {...VideoProps}>
-          <source src="/rain.mp4" />
-        </video>
-        <Controls></Controls>
-      </VideoContainer>
-      <SideBar>a</SideBar>
-    </Container>
+    <>
+      {data && (
+        <Container>
+          <VideoContainer {...FramerVideoContainer}>
+            <video {...VideoProps}>
+              <source src={`/${mainWeather}.mp4`} />
+            </video>
+
+            <Controls>
+              <Weather>
+                <h1> {Math.floor(main.temp - 272)}°</h1>
+                <div>
+                  <span> It's a {mainWeather} day </span>
+                  <span> Don't forget putting sunscreen on </span>
+                </div>
+              </Weather>
+              <HourCityContainer>
+                {isSSR && (
+                  <span>
+                    <Clock
+                      format={"h:mm:ssa"}
+                      style={{ fontSize: "1.5rem" }}
+                      ticking={true}
+                    />
+                  </span>
+                )}
+                <CityChange>
+                  <span> {city.name}</span>
+                  <button>change</button>
+                </CityChange>
+              </HourCityContainer>
+            </Controls>
+          </VideoContainer>
+
+          <SideBar {...FramerSideBar}>
+            <SBCity>
+              <span>
+                <span>City</span> {city.name}
+              </span>
+              <button>change</button>
+            </SBCity>
+
+            <WeatherDetails>
+              <h1>Weather Details</h1>
+              <div>
+                <span>Humidity</span>
+                <span> 25% </span>
+              </div>
+              <div>
+                <span>Wind</span>
+                <span> {currentWeatherData.wind.speed} m/s </span>
+              </div>
+              <div>
+                <span>Cloudiness</span>
+                <span> {currentWeatherData.clouds.all} %</span>
+              </div>
+              <div>
+                <span>Pressure</span>
+                <span> {main.pressure} MB</span>
+              </div>
+            </WeatherDetails>
+            <Chart list={list} />
+            <WeatherDetails>
+              <h1>Next Days</h1>
+              <div>
+                <span>{moment().format("dddd")}</span>
+                <span> {resolveTemperature(1, list)} °C </span>
+              </div>
+              <div>
+                <span>{moment().add(1, "days").format("dddd")}</span>
+                <span> {resolveTemperature(2, list)} °C</span>
+              </div>
+              <div>
+                <span>{moment().add(2, "days").format("dddd")}</span>
+                <span> {resolveTemperature(3, list)} °C</span>
+              </div>
+              <div>
+                <span>{moment().add(3, "days").format("dddd")}</span>
+                <span> {resolveTemperature(4, list)} °C </span>
+              </div>
+            </WeatherDetails>
+          </SideBar>
+        </Container>
+      )}
+    </>
   );
 }
