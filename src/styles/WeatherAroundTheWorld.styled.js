@@ -35,6 +35,10 @@ export const Heading = styled.div`
   span {
     color: ${({ theme }) => theme.grayLight};
   }
+
+  @media (max-width: 768px) {
+    text-align: center;
+  }
 `;
 
 //FRAMER MOTİON PROPS

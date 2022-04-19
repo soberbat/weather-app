@@ -5,6 +5,10 @@ export const Container = styled.div`
   align-items: center;
   margin-bottom: 1rem;
   gap: 1rem;
+
+  @media (max-width: 768px) {
+    justify-content: center;
+  }
 `;
 
 export const SearchInput = styled.input.attrs({ type: "input" })`

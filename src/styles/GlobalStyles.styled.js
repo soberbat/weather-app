@@ -157,6 +157,10 @@ export const resolveIcon = (condition) => {
   if (condition === "Rain") {
     return "rainy.png";
   }
+
+  if (condition === "Mist") {
+    return "mist.png";
+  }
   if (condition === "Thunderstorm") return "thunder.png";
 };
 

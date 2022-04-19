@@ -78,7 +78,7 @@ export const Chart = ({ list }) => {
 
   return (
     <Container>
-      <h1>Temparature</h1>
+      <h1>Temperature</h1>
       {<Line options={options} data={data} />}
     </Container>
   );

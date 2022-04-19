@@ -47,12 +47,13 @@ export const Controls = styled.div`
 
 export const Weather = styled.div`
   display: flex;
+  background-color: rgba(0, 0, 0, 0.2);
   align-items: center;
   padding: 0 2rem;
   gap: 2rem;
   font-size: 2rem;
   h1 {
-    font-size: 15rem;
+    font-size: 20rem;
     margin: 0;
     padding: 0;
   }
@@ -64,6 +65,7 @@ export const Weather = styled.div`
     span {
       display: block;
       font-weight: 700;
+      font-size: 3rem;
     }
 
     span:nth-child(2) {
@@ -72,6 +74,7 @@ export const Weather = styled.div`
   }
 
   @media (max-width: 768px) {
+    background-color: transparent;
     flex-direction: column;
     padding: 1rem 0;
     text-align: center;
@@ -122,6 +125,11 @@ export const CityChange = styled.div`
     border: 0.1px solid ${({ theme }) => theme.grayTextTone};
     color: ${({ theme }) => theme.grayTextTone};
     padding: 0.3rem 1.2rem;
+    cursor: pointer;
+  }
+
+  @media (max-width: 768px) {
+    display: none;
   }
 `;
 
@@ -157,6 +165,7 @@ export const SBCity = styled.div`
     border: 0.1px solid ${({ theme }) => theme.grayTextTone};
     color: ${({ theme }) => theme.grayTextTone};
     padding: 0.3rem 1.2rem;
+    cursor: pointer;
   }
 `;
 

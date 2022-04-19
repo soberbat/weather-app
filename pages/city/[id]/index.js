@@ -2,6 +2,7 @@ import { VideoProps } from "../../../src/styles/GlobalStyles.styled";
 import Clock from "react-live-clock";
 import { useEffect, useState } from "react";
 import { Chart } from "../../../src/components/Chart";
+import Link from "next/link";
 import moment from "moment";
 import {
   CityChange,
@@ -33,18 +34,17 @@ export async function getServerSideProps({ query }) {
 }
 
 export default function City({ data }) {
-  //CURRENT WEATHER DATA
-
+  //CURRENT WEATHER DATAg
   const { list, city } = data;
   const [currentWeatherData, ...rest] = list;
   const { main, weather } = currentWeatherData;
   const mainWeather = weather[0].main.toLowerCase();
-
   const [isSSR, setIsSSR] = useState(false);
   useEffect(() => {
     setIsSSR(true);
   }, []);
 
+  //RESOLVERS
   const resolveTemperature = (day, data) => {
     const currentDay = moment().format("YYYY-MM-DD");
     const forecastedDay = moment().add(day, "days").format("YYYY-MM-DD");
@@ -55,6 +55,38 @@ export default function City({ data }) {
 
     return Math.round(theDay.main.temp - 272);
   };
+
+  const resolveWeatherHeading = (weather) => {
+    if (weather === "Clear") return "It's a clear day";
+
+    if (weather === "Clouds") return "It's a cloudy day";
+
+    if (weather === "Snow") return "It's a snowy day";
+
+    if (weather === "Rain") return "It's a rainy day";
+
+    if (weather === "Thunderstorm") return "There is thunder!";
+
+    if (weather === "Mist") return "It's Misty!";
+  };
+
+  const resolveSuggestion = (weather) => {
+    if (weather === "Clear") return "Put sunscreen on!";
+
+    if (weather === "Clouds") return "You may feel restless...";
+
+    if (weather === "Snow") return "Put your coat on!";
+
+    if (weather === "Rain") return "Get your umbrella.";
+
+    if (weather === "Thunderstorm") return "It's better to stay home...";
+
+    if (weather === "Mist") return "Distant may seem invisible";
+  };
+
+  //RESOLVERS
+
+  console.log(weather[0].main);
 
   return (
     <>
@@ -69,8 +101,8 @@ export default function City({ data }) {
               <Weather>
                 <h1> {Math.floor(main.temp - 272)}°</h1>
                 <div>
-                  <span> It's a {mainWeather} day </span>
-                  <span> Don't forget putting sunscreen on </span>
+                  <span> {resolveWeatherHeading(weather[0].main)} </span>
+                  <span> {resolveSuggestion(weather[0].main)}</span>
                 </div>
               </Weather>
               <HourCityContainer>
@@ -85,7 +117,9 @@ export default function City({ data }) {
                 )}
                 <CityChange>
                   <span> {city.name}</span>
-                  <button>change</button>
+                  <Link href="/">
+                    <button>change</button>
+                  </Link>
                 </CityChange>
               </HourCityContainer>
             </Controls>
@@ -96,7 +130,9 @@ export default function City({ data }) {
               <span>
                 <span>City</span> {city.name}
               </span>
-              <button>change</button>
+              <Link href="/">
+                <button>change</button>
+              </Link>
             </SBCity>
 
             <WeatherDetails>
