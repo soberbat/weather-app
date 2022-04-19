@@ -9,10 +9,11 @@ export const Container = styled.div`
 
   @media (max-width: 768px) {
     flex-direction: column;
-    overflow: scroll;
+    overflow: hidden;
 
     div:nth-child(2) {
       width: 100%;
+      overflow-y: scroll;
     }
   }
 `;
