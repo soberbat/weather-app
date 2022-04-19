@@ -29,6 +29,10 @@ export const Weather = styled.div`
   display: flex;
   align-items: center;
   gap: 1rem;
+
+  @media (max-width: 768px) {
+    justify-content: center;
+  }
 `;
 
 export const ImageContainer = styled.div`
