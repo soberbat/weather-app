@@ -16,6 +16,13 @@ export const Container = styled(motion.div)`
     -webkit-box-shadow: 0px 0px 10px 5px rgba(5, 5, 10, 0.07);
     box-shadow: 0px 0px 10px 5px rgba(5, 5, 10, 0.07);
   }
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 2rem;
+    div:nth-child(1) {
+      border: none;
+    }
+  }
 `;
 
 export const Weather = styled.div`
@@ -81,6 +88,10 @@ export const Location = styled.div`
     font-size: 3rem;
     font-weight: 700;
     color: ${({ theme }) => theme.grayTextTone};
+
+    @media (max-width: 768px) {
+      border: none;
+    }
   }
 `;
 
